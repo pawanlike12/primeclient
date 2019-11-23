@@ -249,11 +249,15 @@ export default class Dashboard extends Component{
       
       <Text style={styles.contentTitle}>New Cellphone No.</Text>
       <View style={{width:"100%", marginLeft:20, marginRight:20}}>
-          <TextInput style={styles.modalinputs}
-                        placeholder=""
-                        keyboardType="email-address"
-                        underlineColorAndroid='transparent'
-                        onChangeText={(cellno) => this.setState({cellno})}/>
+                <View style={[styles.boxinput,{ flexDirection:'row'}]}>
+                                <Text style={{margin:10, marginTop:7}}>+63</Text>
+                             <TextInput style={[styles.newinputs,{width:"100%",marginLeft:0}]}
+                                        placeholder="Cellphone"
+                                        keyboardType="number-pad"
+                                        maxLength={10}
+                                        underlineColorAndroid='transparent'
+                                        onChangeText={(cellno) => this.setState({cellno})}/>
+               </View>
       </View>
       {/* <TouchableHighlight style={styles.closeBtn}
        >
@@ -350,7 +354,7 @@ body: JSON.stringify({
     },
     body: JSON.stringify({
    
-      cellphone: this.state.cellno,
+      cellphone: "+63"+this.state.cellno,
    
       id: this.state.user
    
@@ -364,7 +368,7 @@ body: JSON.stringify({
           {
               // this.props.navigation.navigate('Dashbaord');
               this.setState({ visibleModal: null })
-              this.props.navigation.navigate("MobileOtp",{cellno: this.state.cellno, id:this.state.user});
+              this.props.navigation.navigate("MobileOtp",{cellno: "+63"+this.state.cellno, id:this.state.user});
           }
 
           else if(this.state.data['status'] == 2){

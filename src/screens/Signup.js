@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Form, TextValidator } from 'react-native-validator-form';
 import styles from '../assets/style/Stylesheet';
+import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 import RNPickerSelect from 'react-native-picker-select';
 import { TouchableOpacity } from 'react-native-gesture-handler';
     import Snackbar from 'react-native-snackbar';
