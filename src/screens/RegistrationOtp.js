@@ -16,6 +16,7 @@ import { createAppContainer, StackActions, NavigationActions } from 'react-navig
 import styles from '../assets/style/Stylesheet';
 import CodeInput from 'react-native-confirmation-code-input';
 import OtpInputs from 'react-native-otp-inputs'
+import { Immersive } from 'react-native-immersive'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class BuyDollars extends Component{
   
@@ -45,6 +46,8 @@ export default class BuyDollars extends Component{
         console.log(this.state.value)
     }
     componentDidMount(){
+        Immersive.on()
+        Immersive.setImmersive(true)
        console.log( this.props.navigation.state.params.value)
     }
 

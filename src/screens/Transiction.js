@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import styles from '../assets/style/Stylesheet';
 // import Snackbar from 'react-native-snackbar';
+import { Immersive } from 'react-native-immersive'
 import {showSnackBar} from '@prince8verma/react-native-snackbar';
 import Snackbar from '@prince8verma/react-native-snackbar';
 // import Snackbar from 'react-native-snackbar-component';
@@ -45,6 +46,8 @@ export default class Transiction extends Component{
         }
 
     componentDidMount(){
+      Immersive.on()
+      Immersive.setImmersive(true)
    
         this._loadInitialState().done();
         console.log(JSON.stringify({
@@ -109,9 +112,10 @@ export default class Transiction extends Component{
            
                <ScrollView>
                  <View style={styles.container}>
-            <View style={[styles.newConatiner,{backgroundColor:"#fff", marginBottom:50, marginTop:40 }]}>
-                <Header Name={this.props.navigation.state.params.name} />
-                
+            <View style={[styles.newConatiner,{backgroundColor:"#fff", }]}>
+                <View>
+               <Header Name={this.props.navigation.state.params.name} /> 
+               </View>
                 <Text style={{fontSize:28, textAlign:"center", fontFamily:"Raleway-Bold", marginBottom:20, marginTop:30}}>Transactions History</Text>
               {
                   this.state.temparry.map((value, index)=>{

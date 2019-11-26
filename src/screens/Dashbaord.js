@@ -15,6 +15,7 @@ import {
   // loadAsync,
   Alert,ScrollView,WebView
 } from 'react-native';
+import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 // import Snackbar from 'react-native-snackbar';
 import {showSnackBar} from '@prince8verma/react-native-snackbar';
@@ -174,6 +175,9 @@ export default class Dashboard extends Component{
         this.setState({
           conn:this.conn
         })
+
+        Immersive.on()
+Immersive.setImmersive(true)
 
        
         // AppState.addEventListener("change", this.handleAppStateChange);

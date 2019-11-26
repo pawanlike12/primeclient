@@ -12,6 +12,7 @@ import {
   AsyncStorage,
   Alert,ScrollView,WebView
 } from 'react-native';
+import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 import Snackbar from 'react-native-snackbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -25,6 +26,8 @@ export default class ChangePassword extends Component{
     }
     componentDidMount(){
         console.log(this.props.navigation.state.params.id)
+        Immersive.on()
+        Immersive.setImmersive(true)
     }
 
     onSubmit=()=>{

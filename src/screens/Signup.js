@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Form, TextValidator } from 'react-native-validator-form';
 import styles from '../assets/style/Stylesheet';
+import { Immersive } from 'react-native-immersive'
 import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 import RNPickerSelect from 'react-native-picker-select';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,6 +57,9 @@ export default class Signup extends Component{
 
       }
       componentDidMount(){
+
+        Immersive.on()
+        Immersive.setImmersive(true)
             
         fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_branches',{
           method: 'POST',

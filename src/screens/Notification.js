@@ -20,6 +20,7 @@ import Snackbar from '@prince8verma/react-native-snackbar';
 // import Snackbar from 'react-native-snackbar-component';
 import Header from './Header';
 import Footer from './Footer';
+import { Immersive } from 'react-native-immersive'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class Notification extends Component{
 
@@ -47,6 +48,9 @@ export default class Notification extends Component{
         }
 
     componentDidMount(){
+
+      Immersive.on()
+      Immersive.setImmersive(true)
    
         this._loadInitialState().done();
         console.log(JSON.stringify({
@@ -187,8 +191,10 @@ export default class Notification extends Component{
            
                <ScrollView>
                  <View style={styles.container}>
-            <View style={[styles.newConatiner,{backgroundColor:"#fff", marginBottom:50, marginTop:40}]}>
-            <Header Name={this.props.navigation.state.params.name} />
+            <View style={[styles.newConatiner,{backgroundColor:"#fff",}]}>
+            <View>
+               <Header Name={this.props.navigation.state.params.name} /> 
+               </View>
                
                 <Text style={{fontSize:28, textAlign:"center", marginBottom:20, marginTop:30}}>Inbox</Text>
                {

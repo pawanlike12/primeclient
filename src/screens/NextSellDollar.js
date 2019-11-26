@@ -12,8 +12,10 @@ import {
   AsyncStorage,
   Alert,ScrollView,WebView
 } from 'react-native';
-import Header from './Header';
 import styles from '../assets/style/Stylesheet';
+import { Immersive } from 'react-native-immersive';
+import Header from './Header';
+// import styles from '../assets/style/Stylesheet';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class NextSellDollar extends Component{
@@ -31,6 +33,9 @@ export default class NextSellDollar extends Component{
       }
 
      componentDidMount(){
+
+          Immersive.on()
+    Immersive.setImmersive(true)
 
           this._loadInitialState().done();
           console.log(this.props.navigation.state.params.value)

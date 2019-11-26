@@ -12,6 +12,7 @@ import {
   AsyncStorage,
   Alert,ScrollView,WebView
 } from 'react-native';
+import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 import CodeInput from 'react-native-confirmation-code-input';
 import OtpInputs from 'react-native-otp-inputs'
@@ -43,6 +44,8 @@ export default class BuyDollars extends Component{
     }
     componentDidMount(){
      console.log(this.props.navigation.state.params.rates)
+     Immersive.on()
+     Immersive.setImmersive(true)
        this._loadInitialState().done();
     }
 

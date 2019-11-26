@@ -16,6 +16,7 @@ import styles from '../assets/style/Stylesheet';
 import CodeInput from 'react-native-confirmation-code-input';
 import OtpInputs from 'react-native-otp-inputs'
 import Header from './Header';
+import { Immersive } from 'react-native-immersive'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class RequestCompleted extends Component{
   
@@ -33,6 +34,8 @@ export default class RequestCompleted extends Component{
       }
       componentDidMount(){
         this._loadInitialState().done();
+        Immersive.on()
+Immersive.setImmersive(true)
       }
 
     checkOtp=(code)=>{

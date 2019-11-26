@@ -13,6 +13,7 @@ import {
   Alert,ScrollView,WebView
 } from 'react-native';
 import Header from './Header';
+import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 import Snackbar from 'react-native-snackbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -29,7 +30,10 @@ export default class BuyDollars extends Component{
       }
 
      componentDidMount(){
+      Immersive.on()
+      Immersive.setImmersive(true)
           this._loadInitialState().done();
+          
           // console.log(this.props.navigation.state.params.data)
           fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_rates',{
               method: 'POST',

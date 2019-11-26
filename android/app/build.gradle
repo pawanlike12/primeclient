@@ -194,6 +194,7 @@ android {
 apply plugin: 'com.android.application'
 
 dependencies {
+    implementation project(':react-native-immersive')
     implementation project(':react-native-zendesk-ichat')
     // compile ('com.google.android.gms:play-services-gcm:8.1.0') {
     //     force = true;

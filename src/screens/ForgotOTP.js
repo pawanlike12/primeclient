@@ -18,6 +18,7 @@ import CodeInput from 'react-native-confirmation-code-input';
 import OtpInputs from 'react-native-otp-inputs'
 import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Immersive } from 'react-native-immersive'
 export default class ForgotOTP extends Component{
   
     constructor(props) {
@@ -47,6 +48,8 @@ export default class ForgotOTP extends Component{
     }
     componentDidMount(){
     //    console.log( this.props.navigation.state.params.value)
+    Immersive.on()
+    Immersive.setImmersive(true)
     }
 
     handleSubmit=()=>{

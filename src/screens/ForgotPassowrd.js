@@ -16,6 +16,7 @@ import styles from '../assets/style/Stylesheet';
 import Snackbar from 'react-native-snackbar';
 import { createAppContainer, StackActions, NavigationActions } from 'react-navigation';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Immersive } from 'react-native-immersive'
 export default class ForgotPassword extends Component{
     constructor(props) {
         super(props);
@@ -26,6 +27,8 @@ export default class ForgotPassword extends Component{
     }
     componentDidMount(){
         // console.log(this.props.navigation.state.params.id)
+        Immersive.on()
+        Immersive.setImmersive(true)
     }
 
     onSubmit=()=>{

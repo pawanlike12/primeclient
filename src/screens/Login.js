@@ -13,6 +13,7 @@ import {
   Alert,ScrollView,WebView
 } from 'react-native';
 import Modal from 'react-native-modal';
+import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 import Snackbar from 'react-native-snackbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -145,8 +146,11 @@ export default class Login extends Component{
     }
 
     componentDidMount(){
+      Immersive.on()
+      Immersive.setImmersive(true)
         this._loadInitialState().done();
       }
+      
       _loadInitialState= async() =>{
         var value = await AsyncStorage.getItem('user');
         // alert(await AsyncStorage.getItem('token'))

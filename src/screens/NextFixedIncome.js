@@ -15,6 +15,7 @@ import {
 import Header from './Header';
 import { StackActions, NavigationActions } from 'react-navigation';
 import styles from '../assets/style/Stylesheet';
+import { Immersive } from 'react-native-immersive'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class NextFixedIncome extends Component{
 
@@ -31,7 +32,8 @@ export default class NextFixedIncome extends Component{
       }
 
      componentDidMount(){
-
+          Immersive.on()
+          Immersive.setImmersive(true)
           this._loadInitialState().done();
           console.log(this.props.navigation.state.params.rates)
           fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_rates',{

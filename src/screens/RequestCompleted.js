@@ -18,6 +18,7 @@ import OtpInputs from 'react-native-otp-inputs'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ZendeskSupport from '@synapsestudios/react-native-zendesk-support';
 import RNZendeskChat from 'react-native-zendesk-ichat';
+import { Immersive } from 'react-native-immersive'
 export default class RequestCompleted extends Component{
   
     // otpRef = React.createRef()
@@ -33,6 +34,10 @@ export default class RequestCompleted extends Component{
         })
       }
       componentDidMount(){
+
+        Immersive.on()
+        Immersive.setImmersive(true)
+        
         this._loadInitialState().done();
         fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_user_info',{
           method: 'POST',

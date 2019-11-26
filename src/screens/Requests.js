@@ -12,6 +12,7 @@ import {
   AsyncStorage,
   Alert,ScrollView,WebView
 } from 'react-native';
+import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 // import Snackbar from 'react-native-snackbar';
 import {showSnackBar} from '@prince8verma/react-native-snackbar';
@@ -44,6 +45,8 @@ export default class Requests extends Component{
         }
 
     componentDidMount(){
+      Immersive.on()
+        Immersive.setImmersive(true)
    
         this._loadInitialState().done();
         console.log(JSON.stringify({

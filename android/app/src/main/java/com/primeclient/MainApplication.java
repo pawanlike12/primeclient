@@ -54,9 +54,9 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-
+  
     ReactApplicationContext reactContext = new ReactApplicationContext(this); 
     rnZendeskChatModule = new RNZendeskChatModule(reactContext);
-    rnZendeskChatModule.init("9CQbfrlP4rHwMM95AHRQpYYxNituEiTo");
+    rnZendeskChatModule.init("h8r4wrwGWOz7VUPJ6Y9XFTMkeBbSHSuN");
   }
 }

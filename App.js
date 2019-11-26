@@ -15,7 +15,8 @@ import {
   Button,
   Picker,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  StatusBar
 } from "react-native";
 // import { List, ListItem } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation-stack';
@@ -51,9 +52,13 @@ import RegitrationOtp from "./src/screens/RegistrationOtp";
 import ForgotPassowrd from "./src/screens/ForgotPassowrd";
 import ForgotOTP from "./src/screens/ForgotOTP";
 import MobileOtp from "./src/screens/MobileOtp";
+import { Immersive } from 'react-native-immersive'
 
 // import PushNotification from 'react-native-push-notification';
 var PushNotification = require('react-native-push-notification');
+
+
+
 
 PushNotification.configure({
 
@@ -368,6 +373,10 @@ class App extends Component {
     super(props);
   }
 
+  componentDidMount(){
+    Immersive.on()
+Immersive.setImmersive(true)
+  }
  
   
   render() {

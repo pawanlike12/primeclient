@@ -25,6 +25,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Header from './Header';
 import Footer from './Footer';
+import { Immersive } from 'react-native-immersive'
 import RNZendeskChat from 'react-native-zendesk-ichat';
 import CountDown from 'react-native-countdown-component';
 import ZendeskSupport from '@synapsestudios/react-native-zendesk-support';
@@ -58,6 +59,9 @@ export default class Dashboard extends Component{
       }
 
     componentDidMount=()=>{
+
+      Immersive.on()
+      Immersive.setImmersive(true)
     
     //  const renderContent = () => 
     
@@ -535,8 +539,8 @@ body: JSON.stringify({
                       <Text style={{fontSize:20, marginTop:10, marginLeft:20, fontFamily:"Raleway-Bold", textAlign:"left"}}>Account Officer</Text>   
                     <TextInput style={[styles.newinputs,{marginLeft:20,marginRight:20, textAlign:"center", width:"90%", borderColor:"#000", borderWidth:1}]}
                                         placeholder="Account Officer"
-                                        keyboardType="number-pad"
-                                        maxLength={10}
+                                        keyboardType="email-address"
+                                        // maxLength={10}
                                         value={this.state.account_officer}
                                         underlineColorAndroid='transparent'
                                         onChangeText={account_officer => this.setState({account_officer})}/>
@@ -544,7 +548,7 @@ body: JSON.stringify({
                     <TextInput style={[styles.newinputs,{marginLeft:20,marginRight:20, textAlign:"center", width:"90%", borderColor:"#000", borderWidth:1}]}
                                         placeholder="Account Officer Cell"
                                         keyboardType="number-pad"
-                                        maxLength={10}
+                                        // maxLength={10}
                                         value={this.state.account_officer_cell}
                                         underlineColorAndroid='transparent'
                                         onChangeText={account_officer_cell => this.setState({account_officer_cell})}/>

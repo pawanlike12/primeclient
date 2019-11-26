@@ -13,8 +13,10 @@ import {
   Alert,ScrollView,WebView
 } from 'react-native';
 import Header from './Header';
-import { StackActions, NavigationActions } from 'react-navigation';
 import styles from '../assets/style/Stylesheet';
+import { Immersive } from 'react-native-immersive'
+import { StackActions, NavigationActions } from 'react-navigation';
+// import styles from '../assets/style/Stylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class NextTimeDeposit extends Component{
 
@@ -35,7 +37,8 @@ export default class NextTimeDeposit extends Component{
 
      componentDidMount(){
          this._loadInitialState().done();
-
+         Immersive.on()
+         Immersive.setImmersive(true)
        console.log( this.props.navigation.state.params.value, )
      //    Alert.alert(this.props.navigation.state.params.rate)
        var _rate1= this.props.navigation.state.params.rate.split(',')

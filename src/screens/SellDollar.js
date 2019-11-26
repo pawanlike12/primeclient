@@ -15,6 +15,7 @@ import {
 import Snackbar from 'react-native-snackbar';
 import Header from './Header';
 import styles from '../assets/style/Stylesheet';
+import { Immersive } from 'react-native-immersive'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class SellDollar extends Component{
      constructor(props) {
@@ -29,6 +30,9 @@ export default class SellDollar extends Component{
       }
 
      componentDidMount(){
+
+      Immersive.on()
+      Immersive.setImmersive(true)
           this._loadInitialState().done();
           // console.log(this.props.navigation.state.params.data)
           fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_rates',{

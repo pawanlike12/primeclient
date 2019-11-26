@@ -16,9 +16,16 @@ import {
 import styles from '../assets/style/Stylesheet';
 import CodeInput from 'react-native-confirmation-code-input';
 import OtpInputs from 'react-native-otp-inputs'
+import { Immersive } from 'react-native-immersive'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class CallingScreen extends Component{
   
+  constructor(props) {
+    super(props);
+    this.state={
+      bankNumber:""
+    }
+}
     otpRef = React.createRef()
 
     _loadInitialState= async() =>{
@@ -30,6 +37,8 @@ export default class CallingScreen extends Component{
       }
       componentDidMount(){
         this._loadInitialState().done();
+        Immersive.on()
+        Immersive.setImmersive(true)
         fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_user_info',{
           method: 'POST',
           headers: {
@@ -72,7 +81,13 @@ export default class CallingScreen extends Component{
         .then((responseJson) => {
             this.setState( { numbers: responseJson });
             var numbersData= this.state.numbers["data"]
-          //  console.log(numbersData.length()) 
+           var bankdata= numbersData[1]
+           var bankNumber= bankdata['phone_number']
+           this.setState({
+            bankNumber:bankNumber
+           })
+           console.log(numbersData[1]) 
+           
            
            
         }).catch((error) => {
@@ -102,6 +117,21 @@ export default class CallingScreen extends Component{
         Linking.openURL(phoneNumber);
       };
 
+      onbankcare =()=>{
+
+        let phoneNumber = '';
+     
+        if (Platform.OS === 'android') {
+          phoneNumber = 'tel:'+this.state.bankNumber;
+        }
+        else {
+          phoneNumber = 'telprompt:'+this.state.bankNumber;
+        }
+     
+        Linking.openURL(phoneNumber);
+
+      }
+
     render(){
         return(
            <View style={{width:"100%", height:"100%"}}>
@@ -115,7 +145,11 @@ export default class CallingScreen extends Component{
                 <Text style={{fontSize:28, textAlign:"center", marginTop:30}}>Who do your want to  Call?</Text>
                  <View style={{flex:2, paddingTop:50, paddingBottom:50, height:"90%", justifyContent:"center", alignItems:"center", marginTop:5,
                   padding: 20, }}>
+                        <TouchableOpacity
+                         style={{ width:130,}}
+                         onPress={this.onbankcare}>
                         <Image source={require('../assets/images/CustomerCare.png')} style={{height:130, width:130, resizeMode:"contain"}} />
+                        </TouchableOpacity>
                       <Text style={{fontSize:28, textAlign:"center"}}>Bank Costumer Care</Text>
                   
                 </View>

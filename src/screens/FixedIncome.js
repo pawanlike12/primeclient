@@ -16,6 +16,7 @@ import Snackbar from 'react-native-snackbar';
 import Header from './Header';
 import styles from '../assets/style/Stylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Immersive } from 'react-native-immersive'
 export default class FixedIncome extends Component{
      constructor(props) {
           super(props);
@@ -31,6 +32,9 @@ export default class FixedIncome extends Component{
 
      componentDidMount(){
           this._loadInitialState().done();
+
+          Immersive.on()
+        Immersive.setImmersive(true)
           console.log(this.props.navigation.state.params.rates)
           fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_rates',{
               method: 'POST',

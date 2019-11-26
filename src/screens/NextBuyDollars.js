@@ -12,6 +12,7 @@ import {
   AsyncStorage,
   Alert,ScrollView,WebView
 } from 'react-native';
+import { Immersive } from 'react-native-immersive'
 import { StackActions, NavigationActions } from 'react-navigation';
 import Header from './Header';
 import styles from '../assets/style/Stylesheet';
@@ -31,6 +32,9 @@ export default class NextBuyDollars extends Component{
       }
 
      componentDidMount(){
+
+          Immersive.on()
+    Immersive.setImmersive(true)
 
           this._loadInitialState().done();
           console.log(this.props.navigation.state.params.value)

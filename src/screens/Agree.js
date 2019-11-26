@@ -12,9 +12,15 @@ import {
   AsyncStorage,
   Alert,ScrollView,WebView
 } from 'react-native';
+import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 export default class Agree extends Component{
+
+    componentDidMount(){
+        Immersive.on()
+Immersive.setImmersive(true)
+    }
 
     render(){
         return(

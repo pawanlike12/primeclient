@@ -33,8 +33,8 @@ export default StyleSheet.create({
         marginTop:120
     },
     Smalllogo:{
-        width: 75,
-        height: 75,
+        width: 60,
+        height: 60,
         margin:15,
         resizeMode:"contain",
        
