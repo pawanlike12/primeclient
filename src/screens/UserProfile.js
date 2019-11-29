@@ -474,7 +474,7 @@ body: JSON.stringify({
                   <TextInput style={[styles.newinputs,{ width:"80%", textAlign:"center", marginLeft:0, borderColor:"#000", borderWidth:1}]}
                                         placeholder="primary"
                                         keyboardType="number-pad"
-                                        maxLength={10}
+                                        // maxLength={10}
                                         value={this.state.primary_peso_account}
                                         underlineColorAndroid='transparent'
                                         onChangeText={primary_peso_account => this.setState({primary_peso_account})}/>
@@ -485,7 +485,7 @@ body: JSON.stringify({
                     <TextInput style={[styles.newinputs,{marginLeft:0, width:"80%",  textAlign:"center", borderColor:"#000", borderWidth:1}]}
                                         placeholder="Secondary"
                                         keyboardType="number-pad"
-                                        maxLength={10}
+                                        // maxLength={10}
                                         value={this.state.secondary_peso_account}
                                         underlineColorAndroid='transparent'
                                         onChangeText={secondary_peso_account => this.setState({secondary_peso_account})}/>

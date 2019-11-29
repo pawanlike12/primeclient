@@ -10,6 +10,7 @@ import {
   Image,
   ImageBackground,
   AsyncStorage,
+  AppState,
   Alert,ScrollView,WebView
 } from 'react-native';
 import Modal from 'react-native-modal';
@@ -148,7 +149,31 @@ export default class Login extends Component{
     componentDidMount(){
       Immersive.on()
       Immersive.setImmersive(true)
+      AppState.addEventListener('change', this.handleAppStateChange);
         this._loadInitialState().done();
+      }
+
+      componentWillUnmount() {
+        AppState.removeEventListener('change', this.handleAppStateChange);
+      }
+
+      handleAppStateChange(appState) {
+        if (appState === 'background') {
+          // let date = new Date(Date.now() + (this.state.seconds * 1000));
+    
+          // if (Platform.OS === 'ios') {
+          //   date = date.toISOString();
+          // }
+    
+          // PushNotification.localNotificationSchedule({
+          //   message: "My Notification Message",
+          //   date,
+          // });
+          console.log("background")
+        }
+        else if(appState === 'active'){
+          console.log("forground")
+        }
       }
       
       _loadInitialState= async() =>{

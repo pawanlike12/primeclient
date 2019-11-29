@@ -73,6 +73,8 @@ class Footer extends Component{
               console.error(error);
             });
 
+            // this.timer = setInterval(()=> this.getMovies(), 1000)
+
 
             fetch('http://203.190.153.20/primeclient/primeclientApi/Api/unread_notifications',{
               method: 'POST',
@@ -200,21 +202,49 @@ class Footer extends Component{
               console.error(error);
             });
 
-            // PushNotification.configure({
+            this.timer = setInterval(()=> this.getapis(), 5000)
+            
+    }
 
+    getapis=()=>{
+      fetch('http://203.190.153.20/primeclient/primeclientApi/Api/unread_notifications',{
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+   
+            id: this.state.user,
+            
+          })
+      }).then((response) => response.json())
+      .then((responseJson) => {
+          this.setState( { newdata: responseJson });
+          console.log(this.state.newdata)
+          
+          // console.log(this.state.notification)
+          // console.log( counti)
+          if(this.state.newdata['status']=="1"){
 
-            //   onNotification: function(notification) {
-            //     console.log( 'NOTIFICATION:', notification );
-            //     this.read_notifications
-               
-            //   },
-            
-            //   // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
-            //   senderID: "91663435700",
-            
-            
-            // });
-  
+            this.setState({ notification: this.state.newdata['data'] })
+            this.setState({alert:this.state.notification})
+          var counti = Object.keys(this.state.notification).length;
+          this.setState({
+            count:counti,
+            status:this.state.newdata['status']
+          })
+          
+          // console.log(this.state.status1) 
+          }
+          
+          
+          
+         console.log(this.state.notification)
+          
+      }).catch((error) => {
+        console.error(error);
+      });
     }
 
     // read_notifications=()=>{

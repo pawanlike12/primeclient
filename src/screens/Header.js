@@ -10,6 +10,7 @@ import {
   Image,
   ImageBackground,
   AsyncStorage,
+  AppState,
   Alert,ScrollView,WebView
 } from 'react-native';
 import styles from '../assets/style/Stylesheet';
@@ -53,8 +54,32 @@ class Header extends Component{
       date:dateTime,
       time:time
     })
+    AppState.addEventListener('change', this.handleAppStateChange);
     
  }
+
+ componentWillUnmount() {
+  AppState.removeEventListener('change', this.handleAppStateChange);
+}
+
+handleAppStateChange(appState) {
+  if (appState === 'background') {
+    // let date = new Date(Date.now() + (this.state.seconds * 1000));
+
+    // if (Platform.OS === 'ios') {
+    //   date = date.toISOString();
+    // }
+
+    // PushNotification.localNotificationSchedule({
+    //   message: "My Notification Message",
+    //   date,
+    // });
+    console.log("background")
+  }
+  else if(appState === 'active'){
+    console.log("forground")
+  }
+}
 
     render(){
         // const { navigate } = this.props.navigation;  

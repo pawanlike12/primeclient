@@ -61,6 +61,74 @@ export default class Dashboard extends Component{
         this.setState({
           user:await AsyncStorage.getItem('user')
         })
+          fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_user_info',{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+       
+                id: this.state.user,
+                
+              })
+          }).then((response) => response.json())
+          .then((responseJson) => {
+              this.setState( { data: responseJson });
+              
+              this.setState({ myData: this.state.data['data'] })
+            //  console.log(this.state.myData)
+              this.setState({
+                name: this.state.myData['first_name'],
+                
+              })
+              // console.log(this.state.buyingRate, this.state.sellingRate, this.state.timeDepositefor1M, this.state.timeDepositefor5M)
+       
+          }).catch((error) => {
+            console.error(error);
+          });
+
+          fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_time_deposit_rate',{
+          method: 'POST',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+      
+        }).then((response) => response.json())
+        .then((responseJson) => {
+            this.setState( { data: responseJson });
+            
+            this.setState({ myData: this.state.data['data'] })
+            console.log(this.state.data['data'])
+           var count = Object.keys(this.state.data['data']).length;
+           console.log(count)
+            // console.log( this.state.data['data'])
+            var allArray=[]
+            var valueArry=[]
+            for(let i=0;i<count; ++i){
+                // console.log(this.state.myData[i])
+                var newdata= this.state.myData[i]
+                var time= newdata['time']
+                var rate= newdata['rate']
+                var newtime= time.split(',')
+                var newrate= rate.split(',')
+               
+                var for_1year= newrate[0]
+                var for_5year= newrate[1]
+                allArray.push({title:newdata['ammount_range'], for_1year:for_1year, for_5year:for_5year})
+               var newArray=[]
+              //  console.log(allArray)
+
+            }
+          
+            this.setState({
+                tempArry:allArray
+            })
+           
+        }).catch((error) => {
+          console.error(error);
+        });
 
 
         fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_rates',{
@@ -92,7 +160,58 @@ export default class Dashboard extends Component{
             console.error(error);
           });
 
-          fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_user_info',{
+
+          this.timer = setInterval(()=> this.getrates(), 5000)
+
+            // this.get_notification() 
+      }
+
+      getrates=()=>{
+
+        fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_time_deposit_rate',{
+          method: 'POST',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+      
+        }).then((response) => response.json())
+        .then((responseJson) => {
+            this.setState( { data: responseJson });
+            
+            this.setState({ myData: this.state.data['data'] })
+            console.log(this.state.data['data'])
+           var count = Object.keys(this.state.data['data']).length;
+           console.log(count)
+            // console.log( this.state.data['data'])
+            var allArray=[]
+            var valueArry=[]
+            for(let i=0;i<count; ++i){
+                // console.log(this.state.myData[i])
+                var newdata= this.state.myData[i]
+                var time= newdata['time']
+                var rate= newdata['rate']
+                var newtime= time.split(',')
+                var newrate= rate.split(',')
+               
+                var for_1year= newrate[0]
+                var for_5year= newrate[1]
+                allArray.push({title:newdata['ammount_range'], for_1year:for_1year, for_5year:for_5year})
+               var newArray=[]
+              //  console.log(allArray)
+
+            }
+          
+            this.setState({
+                tempArry:allArray
+            })
+           
+        }).catch((error) => {
+          console.error(error);
+        });
+
+
+        fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_rates',{
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -100,7 +219,7 @@ export default class Dashboard extends Component{
               },
               body: JSON.stringify({
        
-                id: this.state.user,
+                userId: this.state.user,
                 
               })
           }).then((response) => response.json())
@@ -110,8 +229,10 @@ export default class Dashboard extends Component{
               this.setState({ myData: this.state.data['data'] })
             //  console.log(this.state.myData)
               this.setState({
-                name: this.state.myData['first_name'],
-                
+                buyingRate: this.state.myData['us_dollar_peso_rate_ew_buying_1y'],
+                sellingRate: this.state.myData['us_dollar_peso_rate_ew_selling_1y'],
+                fixedIncome:this.state.myData['fixed_income_rate_t-bills_1y'],
+                timeDepositefor5M:this.state.myData['time_deposite_rates_for_5m_1y'],
               })
               // console.log(this.state.buyingRate, this.state.sellingRate, this.state.timeDepositefor1M, this.state.timeDepositefor5M)
        
@@ -120,49 +241,6 @@ export default class Dashboard extends Component{
           });
 
 
-          fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_time_deposit_rate',{
-              method: 'POST',
-              headers: {
-                  Accept: 'application/json',
-                  'Content-Type': 'application/json'
-                },
-          
-            }).then((response) => response.json())
-            .then((responseJson) => {
-                this.setState( { data: responseJson });
-                
-                this.setState({ myData: this.state.data['data'] })
-                console.log(this.state.data['data'])
-               var count = Object.keys(this.state.data['data']).length;
-               console.log(count)
-                // console.log( this.state.data['data'])
-                var allArray=[]
-                var valueArry=[]
-                for(let i=0;i<count; ++i){
-                    // console.log(this.state.myData[i])
-                    var newdata= this.state.myData[i]
-                    var time= newdata['time']
-                    var rate= newdata['rate']
-                    var newtime= time.split(',')
-                    var newrate= rate.split(',')
-                   
-                    var for_1year= newrate[0]
-                    var for_5year= newrate[1]
-                    allArray.push({title:newdata['ammount_range'], for_1year:for_1year, for_5year:for_5year})
-                   var newArray=[]
-                  //  console.log(allArray)
-   
-                }
-              
-                this.setState({
-                    tempArry:allArray
-                })
-               
-            }).catch((error) => {
-              console.error(error);
-            });
-
-            this.get_notification() 
       }
 
     componentDidMount=()=>{
@@ -187,136 +265,7 @@ Immersive.setImmersive(true)
 
  
 
-    get_notification=()=>{
-     console.log(this.state.user)
-
-      fetch('http://203.190.153.20/primeclient/primeclientApi/Api/unread_notifications',{
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-       
-                id: this.state.user,
-                
-              })
-          }).then((response) => response.json())
-          .then((responseJson) => {
-              this.setState( { newdata: responseJson });
-              console.log(this.state.newdata)
-              
-              // console.log(this.state.notification)
-              // console.log( counti)
-              if(this.state.newdata['status']=="1"){
-
-                this.setState({ notification: this.state.newdata['data'] })
-                this.setState({alert:this.state.notification})
-              var counti = Object.keys(this.state.notification).length;
-              this.setState({
-                count:counti,
-                status:this.state.newdata['status']
-              })
-              
-              let toast= Toast.show("You have recieved "+counti+" Notification", {
-                duration: Toast.durations.LONG,
-                position: Toast.positions.TOP,
-                shadow: true,
-                animation: true,
-                hideOnPress: true,
-                delay: 0,
-                
-                onHide: () => {
-                  fetch('http://203.190.153.20/primeclient/primeclientApi/Api/check_balance',{
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-               
-                        id: this.state.user,
-                        
-                      })
-                  }).then((response) => response.json())
-                  .then((responseJson) => {
-                      this.setState( { data: responseJson });
-                       console.log(this.state.data)
-                      if(this.state.data['status']==1){
-                         this.setState({
-                            balanceData:this.state.data['data']
-                         })
-                         if(this.state.balanceData['status']==0){
-                          setTimeout(() => this.setState({
-                            visible: true,
-                            showAlert:true
-                        }), 2000);
-                         }
-                      }
-                      
-                      
-                  }).catch((error) => {
-                    console.error(error);
-                  }); 
-
-                  setTimeout(() => this.setState({
-                    // visible: true,
-                    showAlert:true
-                }), 2000);
-                },
-                onHidden: () => {
-                    // calls on toast\`s hide animation end.
-                }
-            });
-
-            setTimeout(function () {
-              Toast.hide(toast);
-          }, 5000);
-              }
-              else{
-                fetch('http://203.190.153.20/primeclient/primeclientApi/Api/check_balance',{
-                  method: 'POST',
-                  headers: {
-                      Accept: 'application/json',
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-             
-                      id: this.state.user,
-                      
-                    })
-                }).then((response) => response.json())
-                .then((responseJson) => {
-                    this.setState( { data: responseJson });
-                     console.log(this.state.data)
-                    if(this.state.data['status']==1){
-                       this.setState({
-                          balanceData:this.state.data['data']
-                       })
-                       console.log(this.state.balanceData)
-                       if(this.state.balanceData['status']==0){
-                        setTimeout(() => this.setState({
-                          visible: true,
-                          
-                      }), 2000);
-                       }
-                    }
-                    
-                    
-                }).catch((error) => {
-                  console.error(error);
-                }); 
-              }
-              var counti= 
-             console.log(this.state.notification)
-              
-          }).catch((error) => {
-            console.error(error);
-          });
-
-        
-    }
-
+    
     readBalance=()=>{
       console.log(JSON.stringify({
    
@@ -382,73 +331,73 @@ Immersive.setImmersive(true)
    
     render(){
       //  console.log(this.state.alert)
-       this.state.conn.onmessage =(event)=>{
-        var message= JSON.parse(event.data)
-        console.log(message)
-        if(message==null){
-          console.log("hello")
-        }
-        else{
-          if(message['status']=="1"){
-            var row_data= message['data']
-            // console.log(row_data)
-            if(message["type"]=="time_deposit_rate"){
-              var count = Object.keys(row_data).length;
-              console.log(count)
-               // console.log( this.state.data['data'])
-               var allArray=[]
-               var valueArry=[]
-               for(let i=0; i<count; i++){
+      //  this.state.conn.onmessage =(event)=>{
+      //   var message= JSON.parse(event.data)
+      //   console.log(message)
+      //   if(message==null){
+      //     console.log("hello")
+      //   }
+      //   else{
+      //     if(message['status']=="1"){
+      //       var row_data= message['data']
+      //       // console.log(row_data)
+      //       if(message["type"]=="time_deposit_rate"){
+      //         var count = Object.keys(row_data).length;
+      //         console.log(count)
+      //          // console.log( this.state.data['data'])
+      //          var allArray=[]
+      //          var valueArry=[]
+      //          for(let i=0; i<count; i++){
                  
-                // console.log(i)
-                var newdata= row_data[i]
-                // console.log(newdata)
-                var time= newdata['time']
-                var rate= newdata['rate']
-                var newtime= time.split(',')
-                var newrate= rate.split(',')
+      //           // console.log(i)
+      //           var newdata= row_data[i]
+      //           // console.log(newdata)
+      //           var time= newdata['time']
+      //           var rate= newdata['rate']
+      //           var newtime= time.split(',')
+      //           var newrate= rate.split(',')
                
-                var for_1year= newrate[0]
-                var for_5year= newrate[1]
-                allArray.push({title:newdata['ammount_range'], for_1year:for_1year, for_5year:for_5year})
-               var newArray=[]
-               console.log(allArray)
-               }
+      //           var for_1year= newrate[0]
+      //           var for_5year= newrate[1]
+      //           allArray.push({title:newdata['ammount_range'], for_1year:for_1year, for_5year:for_5year})
+      //          var newArray=[]
+      //          console.log(allArray)
+      //          }
              
-               this.setState({
-                   tempArry:allArray
-               })
-            }
-            else if(message["type"]=="salart"){
-              console.log(row_data)
-              var counti = Object.keys(row_data).length;
-              this.setState({alert:row_data,
-                showAlert:true})
-              console.log("hello")
-              console.log(this.state.alert)
+      //          this.setState({
+      //              tempArry:allArray
+      //          })
+      //       }
+      //       else if(message["type"]=="salart"){
+      //         console.log(row_data)
+      //         var counti = Object.keys(row_data).length;
+      //         this.setState({alert:row_data,
+      //           showAlert:true})
+      //         console.log("hello")
+      //         console.log(this.state.alert)
               
                 
-            }
-            else if(message["type"]=="rate_update"){
-               this.setState({
-              buyingRate: row_data['us_dollar_peso_rate_ew_buying_1y'],
-                  sellingRate: row_data['us_dollar_peso_rate_ew_selling_1y'],
-                  fixedIncome:row_data['fixed_income_rate_t-bills_1y'],
-                  // timeDepositefor5M:this.state.myData['time_deposite_rates_for_5m_1y'],
-            })
-            }
+      //       }
+      //       else if(message["type"]=="rate_update"){
+      //          this.setState({
+      //         buyingRate: row_data['us_dollar_peso_rate_ew_buying_1y'],
+      //             sellingRate: row_data['us_dollar_peso_rate_ew_selling_1y'],
+      //             fixedIncome:row_data['fixed_income_rate_t-bills_1y'],
+      //             // timeDepositefor5M:this.state.myData['time_deposite_rates_for_5m_1y'],
+      //       })
+      //       }
             
             
-          }
-          else{
-            console.log("hello")
-          }
-        }
+      //     }
+      //     else{
+      //       console.log("hello")
+      //     }
+      //   }
        
-        // const type= row_data["types"]
+      //   // const type= row_data["types"]
         
-        // console.log(message)
-      }
+      //   // console.log(message)
+      // }
        
         return(
            <View style={{width:"100%", height:"100%"}}>

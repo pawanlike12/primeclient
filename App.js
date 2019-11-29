@@ -15,6 +15,7 @@ import {
   Button,
   Picker,
   Image,
+  AppState,
   AsyncStorage,
   StatusBar
 } from "react-native";
@@ -371,12 +372,22 @@ export default createAppContainer(LoginStack);
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handleAppStateChange = this.handleAppStateChange.bind(this);
   }
+
+
 
   componentDidMount(){
     Immersive.on()
 Immersive.setImmersive(true)
+console.log("hello")
+
   }
+
+  
+
+
+ 
  
   
   render() {
