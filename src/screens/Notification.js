@@ -45,6 +45,8 @@ export default class Notification extends Component{
           this.setState({
             user:await AsyncStorage.getItem('user')
           })
+
+          this.fetchData()
         }
 
     componentDidMount(){
@@ -59,73 +61,7 @@ export default class Notification extends Component{
             
           }))
 
-          fetch('http://203.190.153.20/primeclient/primeclientApi/Api/read_notification_f1',{
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-   
-            id: this.props.navigation.state.params.id,
-            
-          })
-      }).then((response) => response.json())
-      .then((responseJson) => {
-          this.setState( { data: responseJson });
-
-          
-          
-      }).catch((error) => {
-        console.error(error);
-      });
-
-
-      fetch('http://203.190.153.20/primeclient/primeclientApi/Api/read_notification_fall',{
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-   
-            id: this.props.navigation.state.params.id,
-            
-          })
-      }).then((response) => response.json())
-      .then((responseJson) => {
-          this.setState( { data: responseJson });
-
-          
-          
-      }).catch((error) => {
-        console.error(error);
-      });
-
-        fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_notifications',{
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-       
-                id: this.props.navigation.state.params.id,
-                
-              })
-          }).then((response) => response.json())
-          .then((responseJson) => {
-              this.setState( { newdata: responseJson });
-             console.log(this.state.newdata)
-             this.setState({
-                temparry:this.state.newdata['data']
-             })
-            //  this.state.temparry= this.state.data
-              
-          }).catch((error) => {
-            console.error(error);
-          });
-
+        
 
           // fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_transaction',{
           //   method: 'POST',
@@ -161,11 +97,78 @@ export default class Notification extends Component{
           //   console.error(error);
           // });
 
-          this.fetchData()
+        
     }
 
     fetchData=()=>{
-        // console.log(this.state.user)
+      fetch('http://203.190.153.20/primeclient/primeclientApi/Api/read_notification_f1',{
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+   
+            id: this.state.user,
+            
+          })
+      }).then((response) => response.json())
+      .then((responseJson) => {
+          this.setState( { data: responseJson });
+
+          
+          
+      }).catch((error) => {
+        console.error(error);
+      });
+
+
+      fetch('http://203.190.153.20/primeclient/primeclientApi/Api/read_notification_fall',{
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+   
+            id: this.state.user,
+            
+          })
+      }).then((response) => response.json())
+      .then((responseJson) => {
+          this.setState( { data: responseJson });
+          // alert("getnotification")
+          
+          
+      }).catch((error) => {
+        console.error(error);
+      });
+
+        fetch('http://203.190.153.20/primeclient/primeclientApi/Api/get_notifications',{
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+       
+                id: this.state.user,
+                
+              })
+          }).then((response) => response.json())
+          .then((responseJson) => {
+              this.setState( { newdata: responseJson });
+             console.log(this.state.newdata)
+            
+             this.setState({
+                temparry:this.state.newdata['data']
+             })
+            //  this.state.temparry= this.state.data
+              
+          }).catch((error) => {
+            console.error(error);
+          });
+
     }
     
     // _fetchData = async () => {

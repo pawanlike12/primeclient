@@ -180,31 +180,36 @@ export default class Dashboard extends Component{
             this.setState( { data: responseJson });
             
             this.setState({ myData: this.state.data['data'] })
+           if(this.state.data['stattus']==1){
             console.log(this.state.data['data'])
-           var count = Object.keys(this.state.data['data']).length;
-           console.log(count)
-            // console.log( this.state.data['data'])
-            var allArray=[]
-            var valueArry=[]
-            for(let i=0;i<count; ++i){
-                // console.log(this.state.myData[i])
-                var newdata= this.state.myData[i]
-                var time= newdata['time']
-                var rate= newdata['rate']
-                var newtime= time.split(',')
-                var newrate= rate.split(',')
-               
-                var for_1year= newrate[0]
-                var for_5year= newrate[1]
-                allArray.push({title:newdata['ammount_range'], for_1year:for_1year, for_5year:for_5year})
-               var newArray=[]
-              //  console.log(allArray)
-
-            }
-          
-            this.setState({
+            var count = Object.keys(this.state.data['data']).length;
+            console.log(count)
+             // console.log( this.state.data['data'])
+             var allArray=[]
+             var valueArry=[]
+             for(let i=0;i<count; ++i){
+                 // console.log(this.state.myData[i])
+                 var newdata= this.state.myData[i]
+                 this.setState({
+                   newdata: newdata
+                 })
+                 var time= this.state.newdata['time']
+                 var rate= this.state.newdata['rate']
+                 var newtime= time.split(',')
+                 var newrate= rate.split(',')
+                
+                 var for_1year= newrate[0]
+                 var for_5year= newrate[1]
+                 allArray.push({title:newdata['ammount_range'], for_1year:for_1year, for_5year:for_5year})
+                var newArray=[]
+               //  console.log(allArray)
+               this.setState({
                 tempArry:allArray
             })
+             }
+           }
+          
+           
            
         }).catch((error) => {
           console.error(error);

@@ -115,37 +115,37 @@ class Footer extends Component{
                   delay: 0,
                   
                   onHide: () => {
-                    fetch('http://203.190.153.20/primeclient/primeclientApi/Api/check_balance',{
-                      method: 'POST',
-                      headers: {
-                          Accept: 'application/json',
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
+                    // fetch('http://203.190.153.20/primeclient/primeclientApi/Api/check_balance',{
+                    //   method: 'POST',
+                    //   headers: {
+                    //       Accept: 'application/json',
+                    //       'Content-Type': 'application/json'
+                    //     },
+                    //     body: JSON.stringify({
                  
-                          id: this.state.user,
+                    //       id: this.state.user,
                           
-                        })
-                    }).then((response) => response.json())
-                    .then((responseJson) => {
-                        this.setState( { data: responseJson });
-                         console.log(this.state.data)
-                        if(this.state.data['status']==1){
-                           this.setState({
-                              balanceData:this.state.data['data']
-                           })
-                           if(this.state.balanceData['status']==0){
-                            setTimeout(() => this.setState({
-                              visible: true,
-                              showAlert:true
-                          }), 2000);
-                           }
-                        }
+                    //     })
+                    // }).then((response) => response.json())
+                    // .then((responseJson) => {
+                    //     this.setState( { data: responseJson });
+                    //      console.log(this.state.data)
+                    //     if(this.state.data['status']==1){
+                    //        this.setState({
+                    //           balanceData:this.state.data['data']
+                    //        })
+                    //        if(this.state.balanceData['status']==0){
+                    //         setTimeout(() => this.setState({
+                    //           visible: true,
+                    //           showAlert:true
+                    //       }), 2000);
+                    //        }
+                    //     }
                         
                         
-                    }).catch((error) => {
-                      console.error(error);
-                    }); 
+                    // }).catch((error) => {
+                    //   console.error(error);
+                    // }); 
   
                     setTimeout(() => this.setState({
                       // visible: true,

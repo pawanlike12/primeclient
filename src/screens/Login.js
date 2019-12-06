@@ -18,6 +18,7 @@ import { Immersive } from 'react-native-immersive'
 import styles from '../assets/style/Stylesheet';
 import Snackbar from 'react-native-snackbar';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import PushNotification from 'react-native-push-notification';
 export default class Login extends Component{
 
     constructor(props) {
@@ -88,7 +89,8 @@ export default class Login extends Component{
           console.log(JSON.stringify({
             email:this.state.UserEmail,
             password: this.state.password,
-            token:this.state.token
+            token:this.state.token,
+            device_type:"Android"
              }))
             fetch('http://203.190.153.20/primeclient/primeclientApi/Api/client_login',{
             method: 'POST',
@@ -99,7 +101,8 @@ export default class Login extends Component{
         body: JSON.stringify({
        email:this.state.UserEmail,
        password: this.state.password,
-       token:this.state.token
+       token:this.state.token,
+       device_type:"Android"
         })
       
           }).then((response) => response.json())
@@ -151,6 +154,21 @@ export default class Login extends Component{
       Immersive.setImmersive(true)
       AppState.addEventListener('change', this.handleAppStateChange);
         this._loadInitialState().done();
+
+        PushNotification.configure({
+
+          // (optional) Called when Token is generated (iOS and Android)
+          onRegister: function(token) {
+            console.log(token['token'])
+            AsyncStorage.setItem('token',token['token'])
+          },
+        
+          // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
+          senderID: "91663435700",
+          popInitialNotification: true,
+          requestPermissions: true
+        
+        });
       }
 
       componentWillUnmount() {
@@ -180,7 +198,8 @@ export default class Login extends Component{
         var value = await AsyncStorage.getItem('user');
         // alert(await AsyncStorage.getItem('token'))
         this.setState({
-          token: await AsyncStorage.getItem('token')
+          token: await AsyncStorage.getItem('token'),
+          // DeviceType:await AsyncStorage.getItem('deviceType')
         })
         if( value !== null){
             this.props.navigation.navigate('Dashboard', {

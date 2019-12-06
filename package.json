@@ -16,6 +16,7 @@
     "react-native-confirmation-code-input": "^1.0.4",
     "react-native-countdown-component": "^2.6.0",
     "react-native-dropdownalert": "^4.2.0",
+    "react-native-firebase": "^5.5.6",
     "react-native-flexi-radio-button": "^0.2.2",
     "react-native-full-screen": "0.0.2",
     "react-native-gesture-handler": "^1.4.1",

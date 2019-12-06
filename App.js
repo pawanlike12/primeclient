@@ -54,11 +54,20 @@ import ForgotPassowrd from "./src/screens/ForgotPassowrd";
 import ForgotOTP from "./src/screens/ForgotOTP";
 import MobileOtp from "./src/screens/MobileOtp";
 import { Immersive } from 'react-native-immersive'
+// import firebase from 'react-native-firebase'
 
 // import PushNotification from 'react-native-push-notification';
 var PushNotification = require('react-native-push-notification');
 
-
+// firebase.notifications().onNotification((notification) => {
+//   // console.log(message)
+//   const { title, body } = notification;
+//   // alert(notification)
+//   PushNotification.localNotification({
+//     title: title,
+//     message: body, // (required)
+//   });
+// });
 
 
 PushNotification.configure({
