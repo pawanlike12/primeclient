@@ -59,7 +59,7 @@ export default class Login extends Component{
         </View>
       );
 
-    onSubmit=()=>{
+    onSubmit=async()=>{
 
         if(this.state.UserEmail==""){
             this.setState({
@@ -101,7 +101,7 @@ export default class Login extends Component{
         body: JSON.stringify({
        email:this.state.UserEmail,
        password: this.state.password,
-       token:this.state.token,
+       token:await AsyncStorage.getItem('token'),
        device_type:"Android"
         })
       

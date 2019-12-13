@@ -111,7 +111,7 @@ export default class Transiction extends Component{
            <View style={{flex:1, height:"100%"}}>
            
                <ScrollView>
-                 <View style={styles.container}>
+                 <View style={[styles.container,{marginBottom:60}]}>
             <View style={[styles.newConatiner,{backgroundColor:"#fff", }]}>
                 <View>
                <Header Name={this.props.navigation.state.params.name} /> 

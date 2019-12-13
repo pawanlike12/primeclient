@@ -92,8 +92,8 @@ handleAppStateChange(appState) {
                <Image source={require('../assets/images/logo_small.png')} style={styles.Smalllogo} />
             </TouchableOpacity>
              <View>
-             <Text style={{fontSize:22, textAlign:"right",marginRight:20, fontFamily:"Raleway-Regular", marginTop:30, }}>Hi {this.props.Name} </Text>
-                   <Text style={{fontSize:22, marginRight:20,fontFamily:"Raleway-Regular", marginTop:10, }}>{this.state.date+"  "+this.state.time}</Text>
+             <Text style={{fontSize:18, textAlign:"right",marginRight:20, fontFamily:"Raleway-Regular", marginTop:30, }}>Hi {this.props.Name} </Text>
+                   <Text style={{fontSize:18, marginRight:20,fontFamily:"Raleway-Regular", marginTop:10, }}>{this.state.date+"  "+this.state.time}</Text>
             </View>     
                 
         </View>
