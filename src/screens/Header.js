@@ -28,32 +28,39 @@ class Header extends Component{
            
         }
     }
+
+    gettime=()=>{
+      var day = new Date().getDate(); //Current Date
+      var month = new Date().getMonth() + 1; //Current Month
+      var year = new Date().getFullYear(); 
+      var hours = new Date().getHours(); //Current Hours
+      var min = new Date().getMinutes(); //Current Minutes
+      var sec = new Date().getSeconds(); //Current Seconds
+          if (day < 10) {
+        day = '0' + day;
+        }
+        if (month < 10) {
+          month = '0' + month;
+        }
+        if (hours < 10) {
+          hours = '0' + hours;
+          }
+          if (min < 10) {
+              min = '0' + min;
+          }
+      var dateTime= day + '/' + month + '/' + year;
+      var time= hours+":"+min
+      // var newdate= this.state.date.split(' ')
+      this.setState({
+        date:dateTime,
+        time:time
+      })
+    }
+
  componentDidMount(){
-    var day = new Date().getDate(); //Current Date
-    var month = new Date().getMonth() + 1; //Current Month
-    var year = new Date().getFullYear(); 
-    var hours = new Date().getHours(); //Current Hours
-    var min = new Date().getMinutes(); //Current Minutes
-    var sec = new Date().getSeconds(); //Current Seconds
-        if (day < 10) {
-      day = '0' + day;
-      }
-      if (month < 10) {
-        month = '0' + month;
-      }
-      if (hours < 10) {
-        hours = '0' + hours;
-        }
-        if (min < 10) {
-            min = '0' + min;
-        }
-    var dateTime= day + '/' + month + '/' + year;
-    var time= hours+":"+min
-    // var newdate= this.state.date.split(' ')
-    this.setState({
-      date:dateTime,
-      time:time
-    })
+   
+
+    this.timer = setInterval(()=> this.gettime(), 1000)
     AppState.addEventListener('change', this.handleAppStateChange);
     
  }
