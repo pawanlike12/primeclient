@@ -12,7 +12,7 @@
     "@synapsestudios/react-native-zendesk-support": "^1.1.0-rc.1",
     "native-base": "^2.13.7",
     "react": "16.8.6",
-    "react-native": "0.60.5",
+    "react-native": "0.62.3",
     "react-native-confirmation-code-input": "^1.0.4",
     "react-native-countdown-component": "^2.6.0",
     "react-native-dropdownalert": "^4.2.0",
